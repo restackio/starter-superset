@@ -1,3 +1,7 @@
+
+# Secret key
+SECRET_KEY= "4MCsZm1ciqjZ4347/jIrefw34vKOPZ37Rr9k2iguLd3OeeCiZ45aw5ha"
+
 # Superset specific config
 ROW_LIMIT = 5000
 
