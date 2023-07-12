@@ -9,4 +9,4 @@ WTF_CSRF_EXEMPT_LIST = []
 WTF_CSRF_TIME_LIMIT = 60 * 60 * 24 * 365
 
 # Set this API key to enable Mapbox visualizations
-MAPBOX_API_KEY = 'test'
+MAPBOX_API_KEY = 'pk.eyJ1IjoiYWJvdXRwaGlsaXBwZSIsImEiOiJjbGswY2t4M3YwMTg2M2RubXh3aWlmcHZwIn0.go2pBHdsUa0ljydvUTm0Eg'
