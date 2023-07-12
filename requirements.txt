@@ -1,0 +1,7 @@
+redis==3.5.3
+snowflake-sqlalchemy==1.2.4
+psycopg2==2.9.1
+gunicorn
+pyarrow==5.0.0
+gevent==21.8.0
+sqlalchemy-redshift==0.8.14
