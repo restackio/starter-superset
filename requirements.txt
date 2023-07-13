@@ -1,2 +1,0 @@
-snowflake-sqlalchemy==1.2.4
-sqlalchemy-redshift==0.8.14
