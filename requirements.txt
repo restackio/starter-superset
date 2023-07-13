@@ -1,10 +1,3 @@
-psycopg2==2.9.1
-psycopg2-binary==2.9.1
-Authlib~=0.15.3
-pybigquery
-typing-extensions~=3.10
-flask_oauthlib
-authlib
 sqlalchemy-redshift~=0.8.14
 snowflake-connector-python==2.7.9
 snowflake-sqlalchemy==1.2.4
