@@ -7,7 +7,9 @@ USER root
 # you want to connect to here:
 # https://superset.apache.org/installation.html#database-dependencies
 
-RUN pip install snowflake-sqlalchemy==1.2.4 sqlalchemy-redshift==0.8.14
+COPY requirements.txt /app/requirements.txt
+RUN pip install -r /app/requirements.txt
+ENV REQUIREMENTS_LOCAL=/app/requirements.txt
 
 # Example: add custom configuration
 # https://superset.apache.org/docs/installation/configuring-superset/#configuring-superset
