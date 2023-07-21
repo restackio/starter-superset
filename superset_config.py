@@ -1,10 +1,12 @@
+
+## Mandatory configuration // Do not change
+
 import os
 from cachelib.redis import RedisCache
 
 def env(key, default=None):
     return os.getenv(key, default)
 
-# MAPBOX_API_KEY = env('MAPBOX_API_KEY', '')
 CACHE_CONFIG = {
       'CACHE_TYPE': 'redis',
       'CACHE_DEFAULT_TIMEOUT': 300,
@@ -18,7 +20,6 @@ DATA_CACHE_CONFIG = CACHE_CONFIG
 
 SQLALCHEMY_DATABASE_URI = f"postgresql+psycopg2://{env('DB_USER')}:{env('DB_PASS')}@{env('DB_HOST')}:{env('DB_PORT')}/{env('DB_NAME')}"
 SQLALCHEMY_TRACK_MODIFICATIONS = True
-# SECRET_KEY = env('SECRET_KEY', 'thisISaSECRET_1234')
 
 class CeleryConfig(object):
   CELERY_IMPORTS = ('superset.sql_lab', )
@@ -33,9 +34,15 @@ RESULTS_BACKEND = RedisCache(
       key_prefix='superset_results'
 )
 
+SECRET_KEY= env('SECRET_KEY')
 
-# Overrides
-# my_override
+## Custom configuration and overrides // Add your configuration below
+## https://superset.apache.org/docs/installation/configuring-superset
+
+
+# Feature flags
+# https://superset.apache.org/docs/installation/configuring-superset#feature-flags
+
 FEATURE_FLAGS = {
   "ALERTS_ATTACH_REPORTS": True,
   "ALLOW_ADHOC_SUBQUERY": True,
@@ -57,14 +64,15 @@ FEATURE_FLAGS = {
   "THUMBNAILS": True,
   "ALERT_REPORTS": True
 }
+
+# Data cache config
+# https://superset.apache.org/docs/installation/cache/#fallback-metastore-cache
+
 DATA_CACHE_CONFIG = {
   "CACHE_TYPE": "SupersetMetastoreCache",
   "CACHE_KEY_PREFIX": "superset_results",
   "CACHE_DEFAULT_TIMEOUT": 86400,
 }
-
-# Secret key
-SECRET_KEY= "4MCsZm1ciqjZ4347/jIrefw34vKOPZ37Rr9k2iguLd3OeeCiZ45aw5ha"
 
 # Superset specific config
 ROW_LIMIT = 5000
@@ -76,5 +84,14 @@ WTF_CSRF_EXEMPT_LIST = []
 # A CSRF token that expires in 1 year
 WTF_CSRF_TIME_LIMIT = 60 * 60 * 24 * 365
 
-# Set this API key to enable Mapbox visualizations
-MAPBOX_API_KEY = "pk.eyJ1IjoiYWJvdXRwaGlsaXBwZSIsImEiOiJjbGswY2t4M3YwMTg2M2RubXh3aWlmcHZwIn0.go2pBHdsUa0ljydvUTm0Eg"
+# Set an API key to enable Mapbox visualizations
+MAPBOX_API_KEY = env('MAPBOX_API_KEY')
+
+# For allowing anonymous users to see specific Dashboards
+# AUTH_ROLE_PUBLIC = "Public"
+# PUBLIC_ROLE_LIKE = "Restricted Gamma Public Access"
+
+# To facilitate iFrame embedding of public dashboard
+# SESSION_COOKIE_SAMESITE = "None"
+# SESSION_COOKIE_SECURE = True
+# SESSION_COOKIE_HTTPONLY = True
