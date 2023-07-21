@@ -14,7 +14,6 @@ ENV REQUIREMENTS_LOCAL=/app/requirements.txt
 # Example: add custom configuration
 # https://superset.apache.org/docs/installation/configuring-superset/#configuring-superset
 COPY superset_config.py /app/superset_config.py
-RUN cat /app/pythonpath/superset_config.py >> /app/superset_config.py
 ENV SUPERSET_CONFIG_PATH /app/superset_config.py
 
 # Switching back to using the `superset` user
