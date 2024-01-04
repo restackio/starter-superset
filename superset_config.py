@@ -1,7 +1,7 @@
 
 ## Mandatory configuration // Do not change
 
-## Comment
+## Comment 2
 
 import os
 from cachelib.redis import RedisCache
