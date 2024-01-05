@@ -36,7 +36,7 @@ RESULTS_BACKEND = RedisCache(
       key_prefix='superset_results'
 )
 
-SECRET_KEY= env('SECRET_KEY')
+SECRET_KEY= env('SUPERSET_SECRET_KEY')
 
 ## Custom configuration and overrides // Add your configuration below
 ## https://superset.apache.org/docs/installation/configuring-superset
