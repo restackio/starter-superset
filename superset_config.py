@@ -34,6 +34,7 @@ RESULTS_BACKEND = RedisCache(
       key_prefix='superset_results'
 )
 
+## This needs to match the name of the environment variable on your application settings on restack console
 SECRET_KEY= env('SUPERSET_SECRET_KEY')
 
 ## Custom configuration and overrides // Add your configuration below
