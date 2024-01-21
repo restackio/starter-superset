@@ -96,3 +96,14 @@ MAPBOX_API_KEY = env('MAPBOX_API_KEY')
 # SESSION_COOKIE_SAMESITE = "None"
 # SESSION_COOKIE_SECURE = True
 # SESSION_COOKIE_HTTPONLY = True
+
+
+# Enable CORS
+ENABLE_CORS = True
+
+# Configure CORS options if necessary (this is optional and can be customized as needed)
+CORS_OPTIONS = {
+  'supports_credentials': True,
+  'allow_headers': ['*'],
+  # Add other options here as per your requirements
+}
