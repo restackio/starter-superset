@@ -105,5 +105,7 @@ ENABLE_CORS = True
 CORS_OPTIONS = {
   'supports_credentials': True,
   'allow_headers': ['*'],
+  'resources': ['*'],
+  'origins': ['*']
   # Add other options here as per your requirements
 }
