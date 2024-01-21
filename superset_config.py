@@ -81,7 +81,7 @@ ROW_LIMIT = 5000
 # Flask-WTF flag for CSRF
 WTF_CSRF_ENABLED = True
 # Add endpoints that need to be exempt from CSRF protection
-WTF_CSRF_EXEMPT_LIST = []
+# WTF_CSRF_EXEMPT_LIST = ['/api/v1/security/guest_token/']
 # A CSRF token that expires in 1 year
 WTF_CSRF_TIME_LIMIT = 60 * 60 * 24 * 365
 
@@ -96,3 +96,16 @@ MAPBOX_API_KEY = env('MAPBOX_API_KEY')
 # SESSION_COOKIE_SAMESITE = "None"
 # SESSION_COOKIE_SECURE = True
 # SESSION_COOKIE_HTTPONLY = True
+
+
+# Enable CORS
+# ENABLE_CORS = True
+
+# Configure CORS options if necessary (this is optional and can be customized as needed)
+# CORS_OPTIONS = {
+#   'supports_credentials': True,
+#   'allow_headers': ['*'],
+#   'resources': ['*'],  
+#   'origins': ['*'], # add the domains you want to enable or keep * to allow all domains. 
+#   # Add other options here as per your requirements
+# }
