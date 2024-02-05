@@ -104,6 +104,9 @@ MAPBOX_API_KEY = env('MAPBOX_API_KEY')
 # Enable CORS
 ENABLE_CORS = True
 
+HTTP_HEADERS = {"X-Frame-Options":"ALLOWALL"}
+ENABLE_PROXY_FIX = True
+
 # Configure CORS options if necessary (this is optional and can be customized as needed)
 CORS_OPTIONS = {
     'supports_credentials': True,
