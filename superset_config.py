@@ -100,7 +100,11 @@ MAPBOX_API_KEY = env('MAPBOX_API_KEY')
 # SESSION_COOKIE_SECURE = True
 # SESSION_COOKIE_HTTPONLY = True
 
-TALISMAN_ENABLED = False
+# TALISMAN_ENABLED = False
+# TALISMAN_CONFIG = {
+#     "force_https": True,
+#     "content_security_policy": {}
+# }
 HTTP_HEADERS = {"X-Frame-Options": "ALLOWALL"}
 ENABLE_PROXY_FIX = True
 
