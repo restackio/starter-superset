@@ -101,11 +101,37 @@ ROW_LIMIT = 5000
 # SESSION_COOKIE_HTTPONLY = True
 
 TALISMAN_ENABLED = False
-# TALISMAN_CONFIG = {
-#     "force_https": True,
-#     "content_security_policy": {}
-# }
-HTTP_HEADERS = {"X-Frame-Options": "ALLOWALL"}
+TALISMAN_CONFIG = {
+    "content_security_policy": {
+        "base-uri": ["'self'"],
+        "default-src": ["'self'"],
+        "img-src": [
+            "'self'",
+            "blob:",
+            "data:",
+            "https://apachesuperset.gateway.scarf.sh",
+            "https://static.scarf.sh/",
+        ],
+        "worker-src": ["'self'", "blob:"],
+        "connect-src": [
+            "'self'",
+            "https://api.mapbox.com",
+            "https://events.mapbox.com",
+        ],
+        "object-src": "'none'",
+        "style-src": [
+            "'self'",
+            "'unsafe-inline'",
+        ],
+        "script-src": ["'self'", "'strict-dynamic'"],
+        "frame-ancestors": "datakimia-superset-embedded-demo.vercel.app"
+    },
+    "content_security_policy_nonce_in": ["script-src"],
+    "force_https": False,
+    "session_cookie_secure": False,
+}
+
+# HTTP_HEADERS = {"X-Frame-Options": "ALLOWALL"}
 ENABLE_PROXY_FIX = True
 
 # Enable CORS
