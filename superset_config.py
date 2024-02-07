@@ -100,7 +100,7 @@ ROW_LIMIT = 5000
 # SESSION_COOKIE_SECURE = True
 # SESSION_COOKIE_HTTPONLY = True
 
-TALISMAN_ENABLED = False
+# TALISMAN_ENABLED = False
 TALISMAN_CONFIG = {
     "content_security_policy": {
         "base-uri": ["'self'"],
