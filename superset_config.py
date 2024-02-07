@@ -142,6 +142,6 @@ CORS_OPTIONS = {
     'supports_credentials': True,
     'allow_headers': ['*'],
     'resources': ['*'],
-    'origins': ['*'],  # add the domains you want to enable or keep * to allow all domains.
+    'origins': ['datakimia-superset-embedded-demo.vercel.app'],  # add the domains you want to enable or keep * to allow all domains.
     # Add other options here as per your requirements
 }
