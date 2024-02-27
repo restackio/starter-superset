@@ -3,6 +3,8 @@
 import os
 from cachelib.redis import RedisCache
 
+from superset.tasks.types import ExecutorType
+
 
 def env(key, default=None):
     return os.getenv(key, default)
@@ -40,67 +42,31 @@ RESULTS_BACKEND = RedisCache(
 # This needs to match the name of the environment variable on your application settings on restack console
 SECRET_KEY = env('SUPERSET_SECRET_KEY')
 
-# Custom configuration and overrides // Add your configuration below
-# https://superset.apache.org/docs/installation/configuring-superset
-
-
 # Feature flags
 # https://superset.apache.org/docs/installation/configuring-superset#feature-flags
 
 FEATURE_FLAGS = {
-    # "ALERTS_ATTACH_REPORTS": True,
-    # "ALLOW_ADHOC_SUBQUERY": True,
-    # "DASHBOARD_CROSS_FILTERS": True,
-    # "DASHBOARD_RBAC": True,
-    # "DISABLE_LEGACY_DATASOURCE_EDITOR": True,
-    # "DRUID_JOINS": True,
-    "EMBEDDABLE_CHARTS": True,
-    "EMBEDDED_SUPERSET": True,
-    # "ENABLE_DND_WITH_CLICK_UX": True,
-    # "ENABLE_EXPLORE_DRAG_AND_DROP": True,
-    # "ENABLE_TEMPLATE_PROCESSING": True,
-    # "ENFORCE_DB_ENCRYPTION_UI": True,
-    # "ESCAPE_MARKDOWN_HTML": True,
-    # "LISTVIEWS_DEFAULT_CARD_VIEW": True,
-    # "SCHEDULED_QUERIES": True,
-    # "SQLLAB_BACKEND_PERSISTENCE": True,
-    # "SQL_VALIDATORS_BY_ENGINE": True,
-    # "THUMBNAILS": True,
-    # "ALERT_REPORTS": True
+    "EMBEDDABLE_CHARTS": False,
+    "EMBEDDED_SUPERSET": False,
+
+    "THUMBNAILS": True,
+    "THUMBNAILS_SQLA_LISTENERS": True,
 }
 
-# Data cache config
-# https://superset.apache.org/docs/installation/cache/#fallback-metastore-cache
 
-# DATA_CACHE_CONFIG = {
-#     "CACHE_TYPE": "SupersetMetastoreCache",
-#     "CACHE_KEY_PREFIX": "superset_results",
-#     "CACHE_DEFAULT_TIMEOUT": 86400,
-# }
+# Custom configuration and overrides // Add your configuration below
+# https://superset.apache.org/docs/installation/configuring-superset
+
+THUMBNAIL_SELENIUM_USER = "admin"
+THUMBNAIL_EXECUTE_AS = [ExecutorType.CURRENT_USER, ExecutorType.SELENIUM]
+
+ENABLE_PROXY_FIX = True
+
 
 # Superset specific config
 ROW_LIMIT = 5000
 
-# Flask-WTF flag for CSRF
-# WTF_CSRF_ENABLED = True
-# Add endpoints that need to be exempt from CSRF protection
-# WTF_CSRF_EXEMPT_LIST = ['/api/v1/security/guest_token/']
-# A CSRF token that expires in 1 year
-# WTF_CSRF_TIME_LIMIT = 60 * 60 * 24 * 365
 
-# Set an API key to enable Mapbox visualizations
-# MAPBOX_API_KEY = env('MAPBOX_API_KEY')
-
-# For allowing anonymous users to see specific Dashboards
-# AUTH_ROLE_PUBLIC = "Public"
-# PUBLIC_ROLE_LIKE = "Restricted Gamma Public Access"
-
-# To facilitate iFrame embedding of public dashboard
-# SESSION_COOKIE_SAMESITE = "None"
-# SESSION_COOKIE_SECURE = True
-# SESSION_COOKIE_HTTPONLY = True
-
-# TALISMAN_ENABLED = False
 TALISMAN_CONFIG = {
     "content_security_policy": {
         "base-uri": ["'self'"],
@@ -130,9 +96,6 @@ TALISMAN_CONFIG = {
     "force_https": False,
     "session_cookie_secure": False,
 }
-
-# HTTP_HEADERS = {"X-Frame-Options": "ALLOWALL"}
-ENABLE_PROXY_FIX = True
 
 # Enable CORS
 ENABLE_CORS = True
