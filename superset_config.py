@@ -2,6 +2,7 @@
 
 import os
 from cachelib.redis import RedisCache
+from superset.superset_typing import CacheConfig
 
 from superset.tasks.types import ExecutorType
 
@@ -45,23 +46,45 @@ SECRET_KEY = env('SUPERSET_SECRET_KEY')
 # Feature flags
 # https://superset.apache.org/docs/installation/configuring-superset#feature-flags
 
-FEATURE_FLAGS = {
-    "EMBEDDABLE_CHARTS": False,
-    "EMBEDDED_SUPERSET": False,
 
+FEATURE_FLAGS = {
+    "ALERTS_ATTACH_REPORTS": True,
+    "ALLOW_ADHOC_SUBQUERY": True,
+    "DASHBOARD_CROSS_FILTERS": True,
+    "DASHBOARD_RBAC": True,
+    "DISABLE_LEGACY_DATASOURCE_EDITOR": True,
+    "DRUID_JOINS": True,
+    "EMBEDDABLE_CHARTS": True,
+    "EMBEDDED_SUPERSET": True,
+    "ENABLE_DND_WITH_CLICK_UX": True,
+    "ENABLE_EXPLORE_DRAG_AND_DROP": True,
+    "ENABLE_TEMPLATE_PROCESSING": True,
+    "ENFORCE_DB_ENCRYPTION_UI": True,
+    "ESCAPE_MARKDOWN_HTML": True,
+    "LISTVIEWS_DEFAULT_CARD_VIEW": True,
+    "SCHEDULED_QUERIES": True,
+    "SQLLAB_BACKEND_PERSISTENCE": True,
+    "SQL_VALIDATORS_BY_ENGINE": True,
     "THUMBNAILS": True,
     "THUMBNAILS_SQLA_LISTENERS": True,
+    "ALERT_REPORTS": True,
 }
 
 
 # Custom configuration and overrides // Add your configuration below
 # https://superset.apache.org/docs/installation/configuring-superset
 
+THUMBNAIL_CACHE_CONFIG: CacheConfig = {
+    'CACHE_TYPE': 'redis',
+    'CACHE_DEFAULT_TIMEOUT': 24*60*60*7,
+    'CACHE_KEY_PREFIX': 'thumbnail_',
+    'CACHE_REDIS_URL': f"redis://{env('REDIS_HOST')}:{env('REDIS_PORT')}/1"  # 'redis://redis:6379/1'
+}
+
 THUMBNAIL_SELENIUM_USER = "admin"
 THUMBNAIL_EXECUTE_AS = [ExecutorType.CURRENT_USER, ExecutorType.SELENIUM]
 
 ENABLE_PROXY_FIX = True
-
 
 # Superset specific config
 ROW_LIMIT = 5000
