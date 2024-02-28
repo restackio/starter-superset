@@ -2,5 +2,4 @@
 # snowflake-connector-python==3.0.2
 # snowflake-sqlalchemy==1.4.7
 # typing-extensions==4.7.1
-sqlalchemy-bigquery==1.9.0
-
+sqlalchemy-bigquery==1.10.0
