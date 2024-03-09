@@ -18,14 +18,14 @@ CACHE_CONFIG = {
 }
 DATA_CACHE_CONFIG = CACHE_CONFIG
 
-SQLALCHEMY_DATABASE_URI = f"postgresql+psycopg2://{env("DB_USER")}:{env("DB_PASS")}@{env("DB_HOST")}:{env("DB_PORT")}/{env("DB_NAME")}"
+SQLALCHEMY_DATABASE_URI = f"postgresql+psycopg2://{env('DB_USER')}:{env('DB_PASS')}@{env('DB_HOST')}:{env('DB_PORT')}/{env('DB_NAME')}"
 SQLALCHEMY_TRACK_MODIFICATIONS = True
 
 class CeleryConfig(object):
   CELERY_IMPORTS = ("superset.sql_lab", )
   CELERY_ANNOTATIONS = {"tasks.add": {"rate_limit": "10/s"}}
-  BROKER_URL = f"redis://{env("REDIS_HOST")}:{env("REDIS_PORT")}/0"
-  CELERY_RESULT_BACKEND = f"redis://{env("REDIS_HOST")}:{env("REDIS_PORT")}/0"
+  BROKER_URL = f"redis://{env('REDIS_HOST')}:{env('REDIS_PORT')}/0"
+  CELERY_RESULT_BACKEND = f"redis://{env('REDIS_HOST')}:{env('REDIS_PORT')}/0"
 
 CELERY_CONFIG = CeleryConfig
 RESULTS_BACKEND = RedisCache(
