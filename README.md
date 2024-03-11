@@ -134,5 +134,4 @@ application. Users can now access the dashboard and interact with the visualizat
 
 References:
 - Superset Documentation: https://superset.apache.org/docs/
-- Embedding Superset Dashboards:
-https://superset.apache.org/docs/intro-dashboard#embedding-superset-dashboards
+- Embedding Superset Dashboards: https://superset.apache.org/docs/creating-charts-dashboards/creating-your-first-dashboard
