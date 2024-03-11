@@ -1,6 +1,3 @@
-
-## Mandatory configuration // Do not change
-
 import os
 from cachelib.redis import RedisCache
 
