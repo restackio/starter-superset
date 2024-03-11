@@ -14,7 +14,6 @@ This starter repository includes:
 - A pre-configured superset_config to enable dashboard embedding. Follow the steps below to properly enable them.
 - A docker-compose.yaml file for developing in a local environment. This file is not used for Restack builds, just for you to work on locally.
 
-
 ## Getting started
 
 [Deploy Superset on Restack](https://console.restack.io/onboarding/store/db4629fa-30c3-4e6c-8d96-492b44af021d)

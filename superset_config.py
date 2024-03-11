@@ -138,5 +138,8 @@ MAPBOX_API_KEY = env("MAPBOX_API_KEY")
 # PUBLIC_ROLE_LIKE = "Restricted Gamma Public Access"
 PUBLIC_ROLE_LIKE = "Gamma"
 
-
+# To facilitate iFrame embedding of public dashboard
+# SESSION_COOKIE_SAMESITE = "None"
+# SESSION_COOKIE_SECURE = True
+# SESSION_COOKIE_HTTPONLY = True
 
