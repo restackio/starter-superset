@@ -4,7 +4,7 @@ Welcome to the Superset Restack Starter Repository! This repository serves as a 
 
 ## About Restack
 
-Restack is the platform to run your favorite open source products. By leveraging Restack, you can easily build, deploy, and manage your Superset instances in a scalable Kubernetes-based infrastructure managed for you.
+[Restack](https://www.restack.io/) is the platform to run your favorite open source products: Build your custom image, scale cost-efficiently with no downtime and upgrade seamlessly to the latest release.
 
 ## Features
 
