@@ -1,8 +1,15 @@
+## Mandatory configuration // Do not change
+
 import os
 from cachelib.redis import RedisCache
+from superset.superset_typing import CacheConfig
+
+from superset.tasks.types import ExecutorType
+
 
 def env(key, default=None):
     return os.getenv(key, default)
+
 
 CACHE_CONFIG = {
       "CACHE_TYPE": "redis",
@@ -17,6 +24,7 @@ DATA_CACHE_CONFIG = CACHE_CONFIG
 
 SQLALCHEMY_DATABASE_URI = f"postgresql+psycopg2://{env('DB_USER')}:{env('DB_PASS')}@{env('DB_HOST')}:{env('DB_PORT')}/{env('DB_NAME')}"
 SQLALCHEMY_TRACK_MODIFICATIONS = True
+
 
 class CeleryConfig(object):
   CELERY_IMPORTS = ("superset.sql_lab", )
@@ -41,28 +49,49 @@ SECRET_KEY= env("SUPERSET_SECRET_KEY")
 # Feature flags
 # https://superset.apache.org/docs/installation/configuring-superset#feature-flags
 
+
 FEATURE_FLAGS = {
-  "ALERTS_ATTACH_REPORTS": True,
-  "ALLOW_ADHOC_SUBQUERY": True,
-  "DASHBOARD_CROSS_FILTERS": True,
-  "DASHBOARD_RBAC": True,
-  "DISABLE_LEGACY_DATASOURCE_EDITOR": True,
-  "DRUID_JOINS": True,
-  "EMBEDDABLE_CHARTS": True,
-  "EMBEDDED_SUPERSET": True,
-  "ENABLE_DND_WITH_CLICK_UX": True,
-  "ENABLE_EXPLORE_DRAG_AND_DROP": True,
-  "ENABLE_TEMPLATE_PROCESSING": True,
-  "ENFORCE_DB_ENCRYPTION_UI": True,
-  "ESCAPE_MARKDOWN_HTML": True,
-  "LISTVIEWS_DEFAULT_CARD_VIEW": True,
-  "SCHEDULED_QUERIES": True,
-  "SQLLAB_BACKEND_PERSISTENCE": True,
-  "SQL_VALIDATORS_BY_ENGINE": True,
-  "THUMBNAILS": True,
-  "ALERT_REPORTS": True
+    "ALERTS_ATTACH_REPORTS": True,
+    "ALLOW_ADHOC_SUBQUERY": True,
+    "DASHBOARD_CROSS_FILTERS": True,
+    "DASHBOARD_RBAC": True,
+    "DISABLE_LEGACY_DATASOURCE_EDITOR": True,
+    "DRUID_JOINS": True,
+    "EMBEDDABLE_CHARTS": True,
+    "EMBEDDED_SUPERSET": True,
+    "ENABLE_DND_WITH_CLICK_UX": True,
+    "ENABLE_EXPLORE_DRAG_AND_DROP": True,
+    "ENABLE_TEMPLATE_PROCESSING": True,
+    "ENFORCE_DB_ENCRYPTION_UI": True,
+    "ESCAPE_MARKDOWN_HTML": True,
+    "LISTVIEWS_DEFAULT_CARD_VIEW": True,
+    "SCHEDULED_QUERIES": True,
+    "SQLLAB_BACKEND_PERSISTENCE": True,
+    "SQL_VALIDATORS_BY_ENGINE": True,
+    "THUMBNAILS": True,
+    "THUMBNAILS_SQLA_LISTENERS": True,
+    "ALERT_REPORTS": True,
 }
 
+
+# Custom configuration and overrides // Add your configuration below
+# https://superset.apache.org/docs/installation/configuring-superset
+
+THUMBNAIL_CACHE_CONFIG: CacheConfig = {
+    'CACHE_TYPE': 'redis',
+    'CACHE_DEFAULT_TIMEOUT': 24*60*60*7,
+    'CACHE_KEY_PREFIX': 'thumbnail_',
+    'CACHE_REDIS_URL': f"redis://{env('REDIS_HOST')}:{env('REDIS_PORT')}/1"  # 'redis://redis:6379/1'
+}
+
+DATA_CACHE_CONFIG = {
+  "CACHE_TYPE": "SupersetMetastoreCache",
+  "CACHE_KEY_PREFIX": "superset_results",
+  "CACHE_DEFAULT_TIMEOUT": 86400,
+}
+
+THUMBNAIL_SELENIUM_USER = "admin"
+THUMBNAIL_EXECUTE_AS = [ExecutorType.CURRENT_USER, ExecutorType.SELENIUM]
 
 # To embed dashboards, uncomment the TALISMAN_CONFIG and add your Superset URL to "frame-ancestors". 
 # If you are deploying for the first time, just start your superset app and Restack will provision an URL for you.
@@ -111,11 +140,7 @@ CORS_OPTIONS = {
 "origins": ["*"] # Replace this with a list of the domains you want to enable
 }
 
-DATA_CACHE_CONFIG = {
-  "CACHE_TYPE": "SupersetMetastoreCache",
-  "CACHE_KEY_PREFIX": "superset_results",
-  "CACHE_DEFAULT_TIMEOUT": 86400,
-}
+ENABLE_PROXY_FIX = True
 
 # Superset specific config
 ROW_LIMIT = 5000
