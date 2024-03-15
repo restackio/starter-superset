@@ -1,4 +1,4 @@
-FROM apache/superset:3.1.1
+FROM apache/superset:2.1.3
 # Switching to root to install the required packages
 USER root
 
