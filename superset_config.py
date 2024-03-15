@@ -12,13 +12,13 @@ def env(key, default=None):
 
 
 CACHE_CONFIG = {
-    'CACHE_TYPE': 'redis',
-    'CACHE_DEFAULT_TIMEOUT': 300,
-    'CACHE_KEY_PREFIX': 'superset_',
-    'CACHE_REDIS_HOST': env('REDIS_HOST'),
-    'CACHE_REDIS_PORT': env('REDIS_PORT'),
-    'CACHE_REDIS_PASSWORD': env('REDIS_PASSWORD'),
-    'CACHE_REDIS_DB': env('REDIS_DB', 1),
+      "CACHE_TYPE": "redis",
+      "CACHE_DEFAULT_TIMEOUT": 300,
+      "CACHE_KEY_PREFIX": "superset_",
+      "CACHE_REDIS_HOST": env("REDIS_HOST"),
+      "CACHE_REDIS_PORT": env("REDIS_PORT"),
+      "CACHE_REDIS_PASSWORD": env("REDIS_PASSWORD"),
+      "CACHE_REDIS_DB": env("REDIS_DB", 1),
 }
 DATA_CACHE_CONFIG = CACHE_CONFIG
 
@@ -27,21 +27,24 @@ SQLALCHEMY_TRACK_MODIFICATIONS = True
 
 
 class CeleryConfig(object):
-    CELERY_IMPORTS = ('superset.sql_lab',)
-    CELERY_ANNOTATIONS = {'tasks.add': {'rate_limit': '10/s'}}
-    BROKER_URL = f"redis://{env('REDIS_HOST')}:{env('REDIS_PORT')}/0"
-    CELERY_RESULT_BACKEND = f"redis://{env('REDIS_HOST')}:{env('REDIS_PORT')}/0"
-
+  CELERY_IMPORTS = ("superset.sql_lab", )
+  CELERY_ANNOTATIONS = {"tasks.add": {"rate_limit": "10/s"}}
+  BROKER_URL = f"redis://{env('REDIS_HOST')}:{env('REDIS_PORT')}/0"
+  CELERY_RESULT_BACKEND = f"redis://{env('REDIS_HOST')}:{env('REDIS_PORT')}/0"
 
 CELERY_CONFIG = CeleryConfig
 RESULTS_BACKEND = RedisCache(
-    host=env('REDIS_HOST'),
-    port=env('REDIS_PORT'),
-    key_prefix='superset_results'
+      host=env("REDIS_HOST"),
+      port=env("REDIS_PORT"),
+      key_prefix="superset_results"
 )
 
-# This needs to match the name of the environment variable on your application settings on restack console
-SECRET_KEY = env('SUPERSET_SECRET_KEY')
+## This needs to match the name of the environment variable on your application settings on restack console
+SECRET_KEY= env("SUPERSET_SECRET_KEY")
+
+## Custom configuration and overrides // Add your configuration below
+## https://superset.apache.org/docs/installation/configuring-superset
+
 
 # Feature flags
 # https://superset.apache.org/docs/installation/configuring-superset#feature-flags
@@ -81,53 +84,84 @@ THUMBNAIL_CACHE_CONFIG: CacheConfig = {
     'CACHE_REDIS_URL': f"redis://{env('REDIS_HOST')}:{env('REDIS_PORT')}/1"  # 'redis://redis:6379/1'
 }
 
+DATA_CACHE_CONFIG = {
+  "CACHE_TYPE": "SupersetMetastoreCache",
+  "CACHE_KEY_PREFIX": "superset_results",
+  "CACHE_DEFAULT_TIMEOUT": 86400,
+}
+
 THUMBNAIL_SELENIUM_USER = "admin"
 THUMBNAIL_EXECUTE_AS = [ExecutorType.CURRENT_USER, ExecutorType.SELENIUM]
+
+# To embed dashboards, uncomment the TALISMAN_CONFIG and add your Superset URL to "frame-ancestors". 
+# If you are deploying for the first time, just start your superset app and Restack will provision an URL for you.
+
+
+# TALISMAN_CONFIG = { "content_security_policy": {
+# "base-uri": ["'self'"], "default-src": ["'self'"], "img-src": [
+#       "'self'",
+#       "blob:",
+#       "data:",
+#       "https://apachesuperset.gateway.scarf.sh",
+#       "https://static.scarf.sh/",
+# ],
+# "worker-src": ["'self'", "blob:"], "connect-src": [
+#       "'self'",
+#       "https://api.mapbox.com",
+#       "https://events.mapbox.com",
+# ],
+# "object-src": "'none'", "style-src": [
+# "'self'",
+#       "'unsafe-inline'",
+#     ],
+# "script-src": ["'self'", "'strict-dynamic'"],
+# "frame-ancestors": "your-domain.app" 
+# },
+# "content_security_policy_nonce_in": ["script-src"], "force_https": False,
+# "session_cookie_secure": False,
+# }
+
+
+# Data cache config
+# https://superset.apache.org/docs/installation/cache/#fallback-metastore-cache
+
+
+# Enable this will enable you to get additional headers when superset is running behind a load balancer
+ENABLE_PROXY_FIX = True
+
+# Enable CORS
+ENABLE_CORS = True
+
+# Allow CORS requests from a specific domain
+CORS_OPTIONS = {
+"supports_credentials": True,
+"allow_headers": ["*"],
+"resources": ["*"],
+"origins": ["*"] # Replace this with a list of the domains you want to enable
+}
 
 ENABLE_PROXY_FIX = True
 
 # Superset specific config
 ROW_LIMIT = 5000
 
+# Flask-WTF flag for CSRF
+WTF_CSRF_ENABLED = False
+# Add endpoints that need to be exempt from CSRF protection
+WTF_CSRF_EXEMPT_LIST = ["/api/v1/security/guest_token/"]
+# A CSRF token that expires in 1 year
+WTF_CSRF_TIME_LIMIT = 60 * 60 * 24 * 365
 
-TALISMAN_CONFIG = {
-    "content_security_policy": {
-        "base-uri": ["'self'"],
-        "default-src": ["'self'"],
-        "img-src": [
-            "'self'",
-            "blob:",
-            "data:",
-            "https://apachesuperset.gateway.scarf.sh",
-            "https://static.scarf.sh/",
-        ],
-        "worker-src": ["'self'", "blob:"],
-        "connect-src": [
-            "'self'",
-            "https://api.mapbox.com",
-            "https://events.mapbox.com",
-        ],
-        "object-src": "'none'",
-        "style-src": [
-            "'self'",
-            "'unsafe-inline'",
-        ],
-        "script-src": ["'self'", "'strict-dynamic'"],
-        "frame-ancestors": "datakimia-superset-embedded-demo.vercel.app"
-    },
-    "content_security_policy_nonce_in": ["script-src"],
-    "force_https": False,
-    "session_cookie_secure": False,
-}
+# Set an API key to enable Mapbox visualizations
+MAPBOX_API_KEY = env("MAPBOX_API_KEY")
 
-# Enable CORS
-ENABLE_CORS = True
+# For allowing anonymous users to see specific Dashboards
+# AUTH_ROLE_PUBLIC = "Public"
+# PUBLIC_ROLE_LIKE = "Restricted Gamma Public Access"
+PUBLIC_ROLE_LIKE = "Gamma"
 
-# Configure CORS options if necessary (this is optional and can be customized as needed)
-CORS_OPTIONS = {
-    'supports_credentials': True,
-    'allow_headers': ['*'],
-    'resources': ['*'],
-    'origins': ['datakimia-superset-embedded-demo.vercel.app'],  # add the domains you want to enable or keep * to allow all domains.
-    # Add other options here as per your requirements
-}
+# To facilitate iFrame embedding of public dashboard
+# SESSION_COOKIE_SAMESITE = "None"
+# SESSION_COOKIE_SECURE = True
+# SESSION_COOKIE_HTTPONLY = True
+
