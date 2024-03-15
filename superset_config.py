@@ -92,7 +92,7 @@ DATA_CACHE_CONFIG = {
 
 THUMBNAIL_SELENIUM_USER = "admin"
 THUMBNAIL_EXECUTE_AS = [ExecutorType.CURRENT_USER, ExecutorType.SELENIUM]
-WEBDRIVER_BASEURL = "http://0.0.0.0:8088/"
+WEBDRIVER_BASEURL = "http://suamea-superset:8088/"
 # The base URL for the email report hyperlinks.
 WEBDRIVER_BASEURL_USER_FRIENDLY = WEBDRIVER_BASEURL  
 
