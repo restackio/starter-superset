@@ -1,7 +1,0 @@
-sqlalchemy-bigquery==1.10.0
-sqlalchemy-redshift==0.8.14
-snowflake-connector-python==3.0.2
-snowflake-sqlalchemy==1.4.7
-typing-extensions==4.7.1
-apache-superset[cors]
-selenium
