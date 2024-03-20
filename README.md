@@ -39,6 +39,27 @@ FROM apache/superset:<desired-version>
 
 Please note, while you are free to change the version to meet your requirements, some versions may not be compatible with your current setup. If you are considering a specific version and have concerns about compatibility, feel free to reach out to us in the contact section for guidance.
 
+## Enabling dashboard thumbnails generation
+
+Enabling Thumbnails will generate an small image based on your actual Dashboards when listed in Card view mode, as showed in the following image:
+
+![thumbnails](images/thumbnails.png)
+
+Steps:
+1. In the superset_config.py file enable the following feature flags:
+
+```Python
+FEATURE_FLAGS = { "THUMBNAILS": True, "THUMBNAILS_SQLA_LISTENERS": True,
+}
+```
+
+2. In the same superset_config.py file replace {{ restack_application_short_id}} with your application ID in the WEBDRIVER_BASEURL variable
+
+```Python
+WEBDRIVER_BASEURL = "http://{{ restack_application_short_id}}-superset:8088/"
+```
+
+
 ## Embedding Superset dashboards into a web application
 
 Embedding a Superset dashboard into a web application allows you to share interactive data visualizations with users.
