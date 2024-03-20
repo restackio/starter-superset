@@ -46,13 +46,12 @@ RESULTS_BACKEND = RedisCache(
       key_prefix="superset_results"
 )
 
-## This needs to match the name of the environment variable on your
-application settings on restack console 
+## This needs to match the name of the environment variable on your application settings on restack console 
 
 SECRET_KEY= env("SUPERSET_SECRET_KEY")
 
-## Custom configuration and overrides // Add your configuration below ##
-https://superset.apache.org/docs/installation/configuring-superset
+## Custom configuration and overrides // Add your configuration below 
+## https://superset.apache.org/docs/installation/configuring-superset
     
 # Feature flags 
 # https://superset.apache.org/docs/installation/configuring-superset#feature-flags    
@@ -81,8 +80,8 @@ FEATURE_FLAGS = {
 }
 
 
-# Custom configuration and overrides // Add your configuration below #
-https://superset.apache.org/docs/installation/configuring-superset
+# Custom configuration and overrides // Add your configuration below 
+# https://superset.apache.org/docs/installation/configuring-superset
 
 THUMBNAIL_CACHE_CONFIG: CacheConfig = {
     'CACHE_TYPE': 'redis',
