@@ -101,7 +101,7 @@ THUMBNAIL_EXECUTE_AS = [ExecutorType.CURRENT_USER, ExecutorType.SELENIUM]
 
 # Replace {{ restack_application_short_id}} with your application ID
 # WEBDRIVER_BASEURL = "http://{{ restack_application_short_id}}-superset:8088/"
-WEBDRIVER_BASEURL = "http://sueoas-superset:8088/"
+WEBDRIVER_BASEURL = "http://suv6cv-superset:8088/"
 # The base URL for the email report hyperlinks.
 WEBDRIVER_BASEURL_USER_FRIENDLY = WEBDRIVER_BASEURL  
 
