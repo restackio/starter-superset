@@ -155,6 +155,7 @@ ROW_LIMIT = 5000
 
 # Flask-WTF flag for CSRF 
 WTF_CSRF_ENABLED = False
+TALISMAN_ENABLED=False
 
 # Add endpoints that need to be exempt from CSRF protection
 WTF_CSRF_EXEMPT_LIST = ["/api/v1/security/guest_token/"]
