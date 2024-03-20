@@ -14,9 +14,9 @@ RUN apt-get update                             \
 # you want to connect to here:
 # https://superset.apache.org/installation.html#database-dependencies
 
-#COPY requirements.txt /app/requirements.txt
-#RUN pip install --no-cache -r /app/requirements.txt
-#ENV REQUIREMENTS_LOCAL=/app/requirements.txt
+COPY requirements.txt /app/requirements.txt
+RUN pip install --no-cache -r /app/requirements.txt
+ENV REQUIREMENTS_LOCAL=/app/requirements.txt
 
 # Example: add custom configuration
 # https://superset.apache.org/docs/installation/configuring-superset/#configuring-superset
