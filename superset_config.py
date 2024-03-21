@@ -104,6 +104,8 @@ WEBDRIVER_BASEURL = "http://{{ restack_application_short_id}}-superset:8088/"
 # The base URL for the email report hyperlinks.
 WEBDRIVER_BASEURL_USER_FRIENDLY = WEBDRIVER_BASEURL  
 
+PREVENT_UNSAFE_DB_CONNECTIONS = False
+
 # To embed dashboards, uncomment the TALISMAN_CONFIG and add your Superset URL to "frame-ancestors".  
 # If you are deploying for the first time, just start your superset app and Restack will provision an URL for you.
 
