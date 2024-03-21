@@ -2,6 +2,13 @@ FROM apache/superset:3.1.1
 # Switching to root to install the required packages
 USER root
 
+# Example: installing a Firefox and a webdriver to generate thumbnails
+RUN apt-get update                             \
+&& apt-get install -y --no-install-recommends \
+   ca-certificates curl firefox-esr           \
+ && curl -L https://github.com/mozilla/geckodriver/releases/download/v0.30.0/geckodriver-v0.30.0-linux64.tar.gz | tar xz -C /usr/local/bin 
+
+
 # Example: installing a driver to connect to Redshift
 # Find which driver you need based on the analytics database
 # you want to connect to here:
