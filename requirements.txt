@@ -13,7 +13,7 @@ idna==3.10
 pydantic==2.9.2
 pydantic_core==2.23.4
 requests==2.32.3
-restack-sdk-cloud==1.0.8
+restack-sdk-cloud==1.0.9
 smmap==5.0.1
 typing_extensions==4.12.2
 urllib3==2.2.3

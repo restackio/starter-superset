@@ -14,10 +14,8 @@ async def main():
             'password': 'superset-password',
             'name': 'superset-db',
         },
+        'redis': True,
     }
-
-
-    # Configure the stack with the applications
     await restack_cloud_client.stack({
         'name': 'superset stack persistent',
         'previewEnabled': False,
