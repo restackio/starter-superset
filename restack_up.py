@@ -9,15 +9,10 @@ async def main():
     superset_app = {
         'name': 'superset',
         'dockerFilePath': 'Dockerfile',
-        'database': {
-            'username': 'superset-username',
-            'password': 'superset-password',
-            'name': 'superset-db',
-        },
-        'redis': True,
+        'productName': 'Superset',
     }
     await restack_cloud_client.stack({
-        'name': 'superset stack persistent',
+        'name': 'superset stack',
         'previewEnabled': False,
         'applications': [superset_app],
     })
