@@ -11,7 +11,7 @@ async def main():
         'dockerFilePath': 'Dockerfile',
 
         # This deployment supports a pre-configured Superset product with a managed sql database and redis
-        'productName': 'Superset'
+        'productName': 'superset'
     }
     await restack_cloud_client.stack({
         'name': 'superset stack',
